@@ -32,15 +32,13 @@ void* findSquares(void* args) {
         for(d = LB; d < UB; d++) {
           gg = squares[b] + squares[c] - squares[d]; //column 1
           ee = mc - squares[c] - gg; //diag 1
-          if(gg < 1 || ee < 1 ) break;//todo combine
-          if(!square(gg) || !square(ee)) continue; 
-
+          if(gg < 1 || ee < 1 ) break;
           ff = mc - squares[d] - ee; //row 2
+          if(ff < 1) break;
           hh = squares[a] + squares[c] - ee; //colum 2
           ii = mc - gg - hh; //row 3
-          if(ff < 1 || hh < 1 || ii < 1) break;//can we actually skip dd, or just continue;
-          if(squares[b] + squares[c] != ee + ii || squares[a] + squares[b] != ff + ii) continue; //diag 2, column 3
-          if(!square(ff) || !square(hh) || !square(ii)) continue;
+          if(hh < 1 || ii < 1 || squares[b] + squares[c] != ee + ii || squares[a] + squares[b] != ff + ii) continue; //diag 2, column 3
+          if(!square(gg) || !square(ee) || !square(ff) || !square(hh) || !square(ii)) continue;
 
           //check for uniqueness
           aa=squares[a]; bb=squares[b]; cc=squares[c]; dd=squares[d];
