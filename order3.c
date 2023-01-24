@@ -37,7 +37,7 @@ void* findSquares(void* args) {
           if(ff < 1) break;
           hh = squares[a] + squares[c] - ee; //colum 2
           ii = mc - gg - hh; //row 3
-          if(hh < 1 || ii < 1 || squares[b] + squares[c] != ee + ii || squares[a] + squares[b] != ff + ii) continue; //diag 2, column 3
+          if(squares[b] + squares[c] != ee + ii || squares[a] + squares[b] != ff + ii || hh < 1 || ii < 1) continue; //diag 2, column 3
           if(!square(gg) || !square(ee) || !square(ff) || !square(hh) || !square(ii)) continue;
 
           //check for uniqueness
