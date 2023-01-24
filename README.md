@@ -43,10 +43,10 @@ Squares with 7, 8, or 9 unique numbers will print to stdout.
 I had been wanting to learn AVX for a while, and saw this as the perfect problem for my solution. this is my first AVX project, so if you see any room for further optimizations, feel free to send a PR.
 
 __Magic Square__\
-A [magic square](!https://en.wikipedia.org/wiki/Magic_square) is a square grid of numbers that add up to the same number in every column, row, and diagonal. A magic square of squares is just one where every number happens to be a perfect square (has an integer square root). The grid can be any (square) size, but this program only looks at 3x3 since the square of squares of order 3 remains unsolved.
+A [magic square](https://en.wikipedia.org/wiki/Magic_square) is a square grid of numbers that add up to the same number in every column, row, and diagonal. A magic square of squares is just one where every number happens to be a perfect square (has an integer square root). The grid can be any (square) size, but this program only looks at 3x3 since the square of squares of order 3 remains unsolved.
 
 __Parker Square__\
-Matt Parker of [Stand-up Maths](!https://www.youtube.com/user/standupmaths) "had a go" at solving one of these, and came up with one that wasn't quite right, didn't match the diagonal, and had a couple duplicate numbers, but has since become synonymous with giving a difficult problem your best go. sources [video1](!https://www.youtube.com/watch?v=aOT_bG-vWyg), [video2](!https://www.youtube.com/watch?v=FCczHiXPVcA)
+Matt Parker of [Stand-up Maths](https://www.youtube.com/user/standupmaths) "had a go" at solving one of these, and came up with one that wasn't quite right, didn't match the diagonal, and had a couple duplicate numbers, but has since become synonymous with giving a difficult problem your best go. sources [video1](https://www.youtube.com/watch?v=aOT_bG-vWyg), [video2](https://www.youtube.com/watch?v=FCczHiXPVcA)
 
 This program can generate Parker squares as well, by just commenting out one of the constraint checks. If you remove just the second diagonal check, but still require all unique numbers, you'll actually generate a fair number of Parker squares almost immediately. The smallest of which being the five permutations of this one
 
@@ -55,7 +55,7 @@ This program can generate Parker squares as well, by just commenting out one of 
 | 2 | 74 | 127 |
 | 113 | 82 | 46 |
 
-which is the [Gardner square](!https://en.wikipedia.org/wiki/Magic_square#Gardner_square)
+which is the [Gardner square](https://en.wikipedia.org/wiki/Magic_square#Gardner_square)
 
 ### Contributing
 If you can further optimize this code, feel free to send a PR.\
@@ -63,4 +63,4 @@ Make sure to benchmark your changes before submitting.\
 Do not add any unnecessary code, such as automatic core count detection. Let's keep it minimal.
 
 __License__\
-[MIT License](!LICENSE)
+[MIT License](LICENSE)
