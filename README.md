@@ -4,7 +4,6 @@
 
 Improving on the worst case, N^9 time complexity, this runs in (N^4)/(C*V) time.\
 Where C is the number of CPU cores, and V is the vector width of the AVX registers, and N is the upper bound of the root numbers to check.\
-In reality V (vectorization) only provides about a 3-4x performance, despite being 8 integers parallelized.
 
 __Benchmark__\
 The AVX2 version can check N = 624 in 1.7 sec, or N = 4096 in 30min on my 16 core Xeon @ 3.6GHz.
