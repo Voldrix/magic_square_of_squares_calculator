@@ -113,7 +113,7 @@ void* findSquares(void* args) {
           if(mask == 255) continue;
 
           //if registers hold multiple solutions. unlikely so just notify...
-          if(__builtin_popcount(mask) < 7) printf("POPCNT %i\n",__builtin_popcount(~mask));
+          if(__builtin_popcount(mask) < 7) printf("POPCNT %i\n",8 - __builtin_popcount(mask));
           //check for uniqueness
           mask = __builtin_ctz(~mask);
           ptr.s = uniq;
