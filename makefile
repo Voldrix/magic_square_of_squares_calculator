@@ -17,10 +17,15 @@ avx2: avx2.c
 	$(CC) $(CFLAGS) -mavx2 $(TUNE) $^ $(LDFLAGS) -o avx2
 	echo "avx2"
 
+order8: order8.c
+	$(CC) $(CFLAGS) -mavx2 $(TUNE) $^ $(LDFLAGS) -o order8
+	echo "order8"
+
 avx512: avx512.c
 	$(CC) $(CFLAGS) -mavx512dq $(TUNE) $^ $(LDFLAGS) -o avx512
 	echo "avx512"
 
+cube:
 order3:
 	echo "order3"
 

@@ -16,15 +16,16 @@ The code is small enough to fit in the processor's level 1 cache, negating any n
 After it loads, the program generates no new variables/memory allocation while running, so it can take advantage of its few variables to keep them stored at the ready in the CPU registers.
 
 ### Files
-- `order3` multithreaded scaler version (no AVX)
+- `order3` multithreaded scalar version (no AVX)
 - `avx2` 8 integer wide AVX2 instruction set (recommended)
 - `avx512` 16 integer wide AVX512dq instructions
   - this is actually slower than AVX2 in most cases, unless your processor has 2 FMA units per core (Xeon Platinum)
+- `cube` 3x3x3 [magic cube](https://en.wikipedia.org/wiki/Magic_cube) (not of squares). scalar
 - `fma_detect` detect how many FMA units your processor has per core
   - there is no hardware flag for this feature, so this is based on Intel's recommended detection method, which is a benchmark test, so the results may not be perfect. check Intel Ark. mainly just Xeon Platinums have two
 
 __Notes__\
-The AVX files are logical clones of the scaler version, so you can follow the code side-by-side if you're unfamiliar with AVX code.\
+The AVX files are logical clones of the scalar version, so you can follow the code side-by-side if you're unfamiliar with AVX code.\
 I have only tested and optimized this code for Intel processors. IDK how it will perform on AMD.
 
 ### How to Run
@@ -34,7 +35,7 @@ Upper bound must be a multiple of CORES __+ 1__. In the avx files, UB must be a 
 __Build:__ run one of following make commands
 ```
 make (makes order3 + avx2)
-make order3 / avx2 / avx512 / fma
+make order3 / avx2 / avx512 / cube / fma
 ```
 Squares with 7, 8, or 9 unique numbers will print to stdout.
 
