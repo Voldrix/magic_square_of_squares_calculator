@@ -9,7 +9,7 @@ else
 endif
 
 .PHONY: all clean
-.SILENT: avx2 avx512 order3 fma_detect clean
+.SILENT: avx2 avx512 order3 cube fma_detect clean
 
 all: clean avx2 order3
 
@@ -25,8 +25,12 @@ avx512: avx512.c
 	$(CC) $(CFLAGS) -mavx512dq $(TUNE) $^ $(LDFLAGS) -o avx512
 	echo "avx512"
 
-cube:
-order3:
+cube: cube.c
+	$(CC) $(CFLAGS) $(TUNE) $^ $(LDFLAGS) -o cube
+	echo "cube"
+
+order3: order3.c
+	$(CC) $(CFLAGS) $(TUNE) $^ $(LDFLAGS) -o order3
 	echo "order3"
 
 fma: fma_detect.c
@@ -34,5 +38,5 @@ fma: fma_detect.c
 	echo "fma_detect"
 
 clean:
-	rm -f avx2 avx512 order3 fma_detect *.o
+	rm -f avx2 avx512 order3 order8 cube fma_detect *.o
 
