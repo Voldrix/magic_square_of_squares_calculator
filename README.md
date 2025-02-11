@@ -24,10 +24,6 @@ After it loads, the program generates no new variables/memory allocation while r
 - `fma_detect` detect how many FMA units your processor has per core
   - there is no hardware flag for this feature, so this is based on Intel's recommended detection method, which is a benchmark test, so the results may not be perfect. check Intel Ark. mainly just Xeon Platinums have two
 
-__Notes__\
-The AVX files are logical clones of the scalar version, so you can follow the code side-by-side if you're unfamiliar with AVX code.\
-I have only tested and optimized this code for Intel processors. IDK how it will perform on AMD.
-
 ### How to Run
 __Requirements:__ Linux & gcc (only tested with version 12.2)\
 Open the .c file you want to run, and set the 2 macros `CORES` and `UB` (upper bound of root numbers to check)\
