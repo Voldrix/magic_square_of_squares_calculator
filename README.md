@@ -16,7 +16,7 @@ The code is small enough to fit in the processor's level 1 cache, negating any n
 After it loads, the program generates no new variables/memory allocation while running, so it can take advantage of its few variables to keep them stored at the ready in the CPU registers.
 
 ### Files
-- `order3` multithreaded scalar version (no AVX)
+- `scaler` multithreaded scalar version (no AVX)
 - `avx2` 8 integer wide AVX2 instruction set (recommended)
 - `avx512` 16 integer wide AVX512dq instructions
   - this is actually slower than AVX2 in most cases, unless your processor has 2 FMA units per core (Xeon Platinum)
@@ -34,13 +34,12 @@ Open the .c file you want to run, and set the 2 macros `CORES` and `UB` (upper b
 Upper bound must be a multiple of CORES __+ 1__. In the avx files, UB must be a multiple of cores AND vector width (8 for avx2, 16 for avx512) __+ 1__\
 __Build:__ run one of following make commands
 ```
-make (makes order3 + avx2)
-make order3 / avx2 / avx512 / cube / fma
+make (makes scaler + avx2)
+make scaler / avx2 / avx512 / cube / fma
 ```
 Squares with 7, 8, or 9 unique numbers will print to stdout.
 
 ## About
-I had been wanting to learn AVX for a while, and saw this as the perfect problem for my solution. this is my first AVX project, so if you see any room for further optimizations, feel free to send a PR.
 
 __Magic Square__\
 A [magic square](https://en.wikipedia.org/wiki/Magic_square) is a square grid of numbers that add up to the same number in every column, row, and diagonal. A magic square of squares is just one where every number happens to be a perfect square (has an integer square root). The grid can be any (square) size, but this program only looks at 3x3 since the square of squares of order 3 remains unsolved.

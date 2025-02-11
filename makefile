@@ -9,17 +9,14 @@ else
 endif
 
 .PHONY: all clean
-.SILENT: avx2 avx512 order3 cube fma_detect clean
+.SILENT: avx2 avx512 scaler cube fma_detect clean
 
-all: clean avx2 order3
+all: clean avx2 scaler
 
-avx2: avx2.c
-	$(CC) $(CFLAGS) -mavx2 $(TUNE) $^ $(LDFLAGS) -o avx2
-	echo "avx2"
-
-order8: order8.c
-	$(CC) $(CFLAGS) -mavx2 $(TUNE) $^ $(LDFLAGS) -o order8
-	echo "order8"
+avx2: avx2.c avx2_64.c
+	$(CC) $(CFLAGS) -mavx2 $(TUNE) avx2.c $(LDFLAGS) -o avx2
+	$(CC) $(CFLAGS) -mavx2 -mavx512dq -mavx512vl $(TUNE) avx2_64.c $(LDFLAGS) -o avx2_64
+	echo "avx2 & avx2_64"
 
 avx512: avx512.c
 	$(CC) $(CFLAGS) -mavx512dq $(TUNE) $^ $(LDFLAGS) -o avx512
@@ -29,14 +26,15 @@ cube: cube.c
 	$(CC) $(CFLAGS) $(TUNE) $^ $(LDFLAGS) -o cube
 	echo "cube"
 
-order3: order3.c
-	$(CC) $(CFLAGS) $(TUNE) $^ $(LDFLAGS) -o order3
-	echo "order3"
+scaler: scaler.c scaler_64.c
+	$(CC) $(CFLAGS) $(TUNE) scaler.c $(LDFLAGS) -o scaler
+	$(CC) $(CFLAGS) -mavx2 $(TUNE) scaler_64.c $(LDFLAGS) -o scaler_64
+	echo "scaler & scaler_64"
 
 fma: fma_detect.c
 	$(CC) -mavx512f $^ -o fma_detect
 	echo "fma_detect"
 
 clean:
-	rm -f avx2 avx512 order3 order8 cube fma_detect *.o
+	rm -f avx2 avx2_64 avx512 scaler scaler_64 cube fma_detect *.o
 
