@@ -25,10 +25,12 @@ After it loads, the program generates no new variables/memory allocation while r
   - there is no hardware flag for this feature, so this is based on Intel's recommended detection method, which is a benchmark test, so the results may not be perfect. check Intel Ark. mainly just Xeon Platinums have two
 
 ### How to Run
-__Requirements:__ Linux & gcc (only tested with version 12.2)\
-Open the .c file you want to run, and set the 2 macros `CORES` and `UB` (upper bound of root numbers to check)\
-Upper bound must be a multiple of CORES __+ 1__. In the avx files, UB must be a multiple of cores AND vector width (8 for avx2, 16 for avx512) __+ 1__\
-__Build:__ run one of following make commands
+__Requirements:__ Linux & gcc\
+Open the file you want to run, and set the 2 macros `CORES` and `UB` (upper bound of root numbers to check)\
+`UB` must be a multiple of CORES __+ 1__.\
+In the avx files, `UB` must be a multiple of cores AND vector width __+ 1__\
+The 32-bit versions are faster, but can only count to 2 billion\
+__Build:__
 ```
 make (makes scaler + avx2)
 make scaler / avx2 / avx512 / cube / fma
