@@ -16,8 +16,7 @@ void* findSquares(void* args) {
   uint64_t a,b,c,d,j,k,l,mc,uniq[VECTOR_WIDTH],x[9];
   __m512i __attribute__((aligned(64))) aa,bb,cc,dd,ee,ff,gg,hh,ii,xx;
   __m512d __attribute__((aligned(64))) rootf,rooti;
-  //__mmask16 __attribute__((aligned(32))) mask;
-  int mask;
+  __mmask16 __attribute__((aligned(32))) mask;
   union __attribute__((aligned(64))) squareVecPtr {__m512i *v; uint64_t *s;} ptr;
   uint64_t *squares = malloc((UB - LB) * sizeof(uint64_t));
 
@@ -81,7 +80,7 @@ void* findSquares(void* args) {
           //diag 2 == mc
           xx = _mm512_add_epi64(bb, cc);
           xx = _mm512_sub_epi64(xx, ee);
-          //mask |= ~_mm512_cmpeq_epi64_mask(xx, ii);
+          mask |= ~_mm512_cmpeq_epi64_mask(xx, ii);
           if(mask == 65535) continue;
           //column 3 == mc
           xx = _mm512_add_epi64(aa, bb);
