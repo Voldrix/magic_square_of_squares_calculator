@@ -12,16 +12,16 @@
 
 void* findSquares(void* args) {
 
-  uint64_t __attribute__((aligned(64))) inc = *(int*)args;
-  uint64_t __attribute__((aligned(64))) a,b,c,d,j,k,l,mc,uniq[VECTOR_WIDTH],x[9];
+  uint64_t inc = *(int*)args;
+  uint64_t a,b,c,d,j,k,l,mc,uniq[VECTOR_WIDTH],x[9];
+  int mask;
   __m256i __attribute__((aligned(64))) aa,bb,cc,dd,ee,ff,gg,hh,ii,xx;
   __m256d __attribute__((aligned(64))) rootf,rooti;
-  int __attribute__((aligned(64))) mask;
   union __attribute__((aligned(64))) squareVecPtr {__m256i *v; uint64_t *s;} ptr;
   uint64_t *squares = malloc((UB - LB) * sizeof(uint64_t));
   _mm256_zeroall();
 
-  for(int s = LB; s < UB; s++)
+  for(uint64_t s = LB; s < UB; s++)
     squares[s - LB] = s*s;
 
   for(a = LB; a < UB; a++) {
@@ -32,8 +32,7 @@ void* findSquares(void* args) {
         cc = _mm256_set1_epi64x(squares[c-LB]); //row 1
         mc = squares[a-LB] + squares[b-LB] + squares[c-LB]; //magic constant
         for(d = LB; d < UB - VECTOR_WIDTH; d+=VECTOR_WIDTH) {
-          ptr.s = &squares[d-LB];
-          dd = *ptr.v; //vector sequence
+          dd = _mm256_loadu_epi64(&squares[d-LB]); //vector sequence
           //calc gg
           gg = _mm256_set1_epi64x(squares[b-LB] + squares[c-LB]);
           gg = _mm256_sub_epi64(gg, dd); //column 1
@@ -139,6 +138,7 @@ void* findSquares(void* args) {
       }
     }
   }
+  free(squares);
   return 0;
 }
 
