@@ -11,16 +11,17 @@ endif
 .PHONY: all clean
 .SILENT: avx2 avx512 scaler cube fma_detect clean
 
-all: clean avx2 scaler
+all: clean scaler avx2
 
 avx2: avx2.c avx2_64.c
 	$(CC) $(CFLAGS) -mavx2 $(TUNE) avx2.c $(LDFLAGS) -o avx2
 	$(CC) $(CFLAGS) -mavx2 -mavx512dq -mavx512vl $(TUNE) avx2_64.c $(LDFLAGS) -o avx2_64
 	echo "avx2 & avx2_64"
 
-avx512: avx512.c
-	$(CC) $(CFLAGS) -mavx512dq $(TUNE) $^ $(LDFLAGS) -o avx512
-	echo "avx512"
+avx512: avx512.c avx512_64.c
+	$(CC) $(CFLAGS) -mavx512dq $(TUNE) avx512.c $(LDFLAGS) -o avx512
+	$(CC) $(CFLAGS) -mavx512dq $(TUNE) avx512_64.c $(LDFLAGS) -o avx512_64
+	echo "avx512 & avx512_64"
 
 cube: cube.c
 	$(CC) $(CFLAGS) $(TUNE) $^ $(LDFLAGS) -o cube
@@ -36,5 +37,5 @@ fma: fma_detect.c
 	echo "fma_detect"
 
 clean:
-	rm -f avx2 avx2_64 avx512 scaler scaler_64 cube fma_detect *.o
+	rm -f avx2 avx2_64 avx512 avx512_64 scaler scaler_64 cube fma_detect *.o
 
